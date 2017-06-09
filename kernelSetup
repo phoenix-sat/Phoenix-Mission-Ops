@@ -13,5 +13,5 @@ REF_FRAME_NAME =                      # https://naif.jpl.nasa.gov/pub/naif/toolk
 PRODUCER_ID =
 DATA_ORDER =
 DATA_DELIMITER =
-LEAPSECONDS_FILE =
+LEAPSECONDS_FILE = 'naif0007.tls'
 
