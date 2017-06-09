@@ -1,0 +1,17 @@
+# Is this how to comment?
+
+# Lots of details:
+# https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/ug/mkspk.html#Setup,%20Input,%20and%20Output%20File Options
+
+
+INPUT_DATA_TYPE = TL_ELEMENTS
+OUTPUT_SPK_TYPE =
+TLE_INPUT_OBJ_ID = 41474              # https://en.wikipedia.org/wiki/Two-line_element_set
+TLE_SPK_OBJ_ID = 1337                 # https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html#NAIF Object ID numbers
+CENTER_NAME = EARTH_BARYCENTER        # https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html#NAIF Object ID numbers
+REF_FRAME_NAME =                      # https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/frames.html#Reference Frames
+PRODUCER_ID =
+DATA_ORDER =
+DATA_DELIMITER =
+LEAPSECONDS_FILE =
+
