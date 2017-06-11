@@ -54,7 +54,7 @@ barycenter = Scatter3d(
 
 data = Data([threeDPlot, barycenter])
 
-layout = Layout(title="SpiceyPy Cassini Position Example")
+layout = Layout(title="MinXSS TLE->SPK MKSPK demonstration")
 
 fig = dict(data=data, layout=layout)
 plot(fig)
