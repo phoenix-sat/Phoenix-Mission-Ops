@@ -35,7 +35,7 @@ threeDPlot = Scatter3d(
     x=positions[:, 0],  # X coordinates
     y=positions[:, 1],  # Y coordinates
     z=positions[:, 2],  # Z coordinates
-    name='Cassini',
+    name='MinXSS',
     mode='lines',
     line=Line(width=3)
 )
