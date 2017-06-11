@@ -984,3 +984,64 @@ BODY699_RING7_FCENTER
    Planets and Satellites: 2000." All exceptions are commented
    where they occur in this file.
 
+
+
+
+
+
+
+#################
+Added by Bryce Beagle
+
+      The data in this kernel is needed for producing type 10
+      SPK segments based upon the two-line element sets available
+      from NORAD.
+
+      The first 3 numbers are the gravitational harmonics for
+      the earth.  These numbers are dimensionless.
+
+   \begindata
+
+      BODY399_J2 =    1.082616D-3
+      BODY399_J3 =   -2.53881D-6
+      BODY399_J4 =   -1.65597D-6
+
+   \begintext
+
+      The next item is the square root of GM for the earth given
+      in units of earth-radii**1.5/Minute
+
+   \begindata
+
+      BODY399_KE =    7.43669161D-2
+
+   \begintext
+
+      The next two items give the top and bottom of the atmospheric
+      drag model used by the type 10 ephemeris type.  Don't adjust
+      these unless you understand the full implications of such
+      changes.
+
+   \begindata
+
+      BODY399_QO =  120.0D0
+      BODY399_SO =   78.0D0
+
+   \begintext
+
+      The following is the equatorial radius of the earth as used
+      by NORAD in km.
+
+   \begindata
+
+      BODY399_ER = 6378.135D0
+
+   \begintext
+
+      The value of AE is the number of distance units per earth
+      radii used by the NORAD state propagation software.  Don't
+      change this value.
+
+   \begindata
+
+      BODY399_AE =    1.0D0
