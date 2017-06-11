@@ -1,0 +1,3 @@
+/opt/cspice/exe/mkspk -setup kernelSetup
+
+Could probably be made into a bash script or executed with Python's subprocess.call() function
