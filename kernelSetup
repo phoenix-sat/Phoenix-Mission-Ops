@@ -1,17 +1,174 @@
-# Is this how to comment?
-
-# Lots of details:
-# https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/ug/mkspk.html#Setup,%20Input,%20and%20Output%20File Options
-
-
-INPUT_DATA_TYPE = TL_ELEMENTS
-OUTPUT_SPK_TYPE =
-TLE_INPUT_OBJ_ID = 41474              # https://en.wikipedia.org/wiki/Two-line_element_set
-TLE_SPK_OBJ_ID = 1337                 # https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html#NAIF Object ID numbers
-CENTER_NAME = EARTH_BARYCENTER        # https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html#NAIF Object ID numbers
-REF_FRAME_NAME =                      # https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/frames.html#Reference Frames
-PRODUCER_ID =
-DATA_ORDER =
-DATA_DELIMITER =
+\begindata
+INPUT_DATA_TYPE = 'TL_ELEMENTS'
+OUTPUT_SPK_TYPE = 10
+TLE_INPUT_OBJ_ID = 41474
+TLE_SPK_OBJ_ID = 41474
+CENTER_NAME = 'EARTH'
+REF_FRAME_NAME = 'J2000'
+PRODUCER_ID = 'Bryce Beagle, ASU/Phoenix'
 LEAPSECONDS_FILE = 'naif0007.tls'
+PCK_FILE = 'cpck05Mar2004.tpc'
+INPUT_DATA_FILE   = 'minXSS.tle'
+OUTPUT_SPK_FILE   = 'minXSS.bsp'
+\begintext
+
+
+
+https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/ug/mkspk.html#Setup,%20Input,%20and%20Output%20File Options
+https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/ug/mkspk.html#Input%20Type%20TL_ELEMENTS
+
+INPUT_DATA_TYPE
+
+    'STATES' or 'ELEMENTS' or 'EQ_ELEMENTS' or 'TL_ELEMENTS'
+
+    TL_ELEMENTS is for TLE data
+
+OUTPUT_SPK_TYPE
+
+    https://naif.jpl.nasa.gov/pub/naif/self_training/individual_docs/B17_making_an_spk.pdf
+
+    5 or 8 or 9 or 10 or 12 or 13 or 15 or 17
+
+    2 - Chebyshev polynomials for position, velocity given by differentiation:
+
+        Apparently can't be used for MKSPK?
+        Used at JPL for planetary ephemerides.
+
+    3 - Separate Chebyshev polynomials for position and velocity:
+
+        Apparently can't be used for MKSPK?
+        Used at JPL for satellite ephemerides.
+
+    5 - Weighted two-body extrapolation:
+
+        Works best for an orbit well approximated by a sequence of one or
+        more conic orbits.
+
+        Yields compact SPK files when the trajectory is well approximated by
+        piecewise two-body motion.
+
+        Often used for comets and asteroids, as well as for sparse data sets
+        where a two-body approximation is acceptable
+
+    9 - Sliding-window Lagrange and Hermite interpolation of unequally-spaced
+    states:
+
+        Fits data regardless of the expected physics.
+        A good, general choice
+        Often used by users of NAIF’s “Make SPK” (MKSPK) application.
+
+    10 - Weighted Space Command two-line element extrapolation:
+
+        Applies ONLY to Two Line Element Sets (TLEs).
+        Often used for earth orbiters.
+
+    12 - ????:
+
+        ????
+
+    13 - Sliding-window Lagrange and Hermite interpolation of unequally-spaced
+    states:
+
+        Fits data regardless of the expected physics.
+        When you have very accurate velocity data.
+        Often used by users of NAIF’s “Make SPK” (MKSPK) application.
+
+    14 - Separate Chebyshev polynomials for position and velocity, with variable
+    time steps:
+
+        Apparently can't be used for MKSPK?
+        This is the most flexible Chebyshev data type.
+
+    15 - Precessing conic elements:
+
+        Provides a very compact ephemeris representation; limited to orbits
+        where this type of approximation is valid.
+
+    17 - Equinoctial elements:
+
+        Most suited for representation of ephemerides of natural satellites in
+        equatorial or near-equatorial orbits.
+
+    [EDIT - NO] Using type 9 for now as it seems the most basic. Type 10 may be useful?
+    Using type 10 because required for TLE
+
+TLE_SPK_OBJ_ID
+
+    NAIF ID for the TLE object. This is the NAIF ID to be used in the output
+    TLE-based SPK file for the TLE object of interest. This keyword must be
+    specified together with the TLE_INPUT_OBJ_ID keyword.
+
+    Using 41474 because that is the ID given to MinXSS in the TLE file
+
+    More info on Object IDs:
+    https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/FORTRAN/req/naif_ids.html#NAIF Object ID numbers
+
+CENTER_NAME
+
+    This is one if the NAIF supported names for the center of motion. This
+    keyword is required if the CENTER_ID keyword is absent. If both keywords are
+    present the MKSPK program uses the CENTER_ID and ignores this assignment. If
+    this keyword is provided for the 'TL_ELEMENTS'/SPK 10 case, it must have the
+    value 'Earth'.
+
+    Used instead of CENTER_ID because I felt it was more descriptive than a
+    number
+
+REF_FRAME_NAME
+
+    If this is not a standard frame supported by NAIF, the definition for this
+    frame must be present in a frame definitions kernel file specified in the
+    FRAME_DEF_FILE keyword. For the 'TL_ELEMENTS'/SPK 10 case this keyword must
+    have the value 'J2000'.
+
+    Using J2000 because it is required
+
+PRODUCER_ID
+
+    Producer identifier. This is a name identifying the producer of this SPK
+    file. This value will appear in the comment area of the SPK.
+
+DATA_ORDER
+
+    Ordered list of input parameter names as they appear in the input data
+    records. The names are delimited with white space.
+
+    From "Input Data Type TL_ELEMENTS / Output SPK Type 10" example:
+    "Note that no keywords describing input data format are present in the setup
+    file. These keywords are not needed for 'TL_ELEMENTS'/SPK 10 program runs
+    because two-line elements files have fixed format and are processed by the
+    program as a special case."
+
+
+DATA_DELIMITER
+
+    Delimiter used to separate data items. This is picked from the following
+    set: 'TAB' , 'EOL' , comma (',') , semicolon (';') or white space (' ').
+    Only one of these values can be used. If your data does not use one of these
+    delimiters the data must be modified before being processed through MKSPK.
+
+    From "Input Data Type TL_ELEMENTS / Output SPK Type 10" example:
+    "Note that no keywords describing input data format are present in the setup
+    file. These keywords are not needed for 'TL_ELEMENTS'/SPK 10 program runs
+    because two-line elements files have fixed format and are processed by the
+    program as a special case."
+
+LEAPSECONDS_FILE
+
+    Leapseconds file name. This is the SPICE LSK file name, including full or
+    relative path specification.
+
+    I downloaded the file from the spiceypy tutorial
+
+PCK_FILE
+
+    SPICE Planetary Constants file name. One or more files can be used. This
+    keyword may be absent in the case when you do not need PCK constants or when
+    these constants are defined with other setup keywords. Include path(s) if
+    needed. For the 'TL_ELEMENTS'/SPK 10 case a PCK file containing Earth
+    geophysical constants must be provided using this keyword.
+
+    I downloaded the file from the spiceypy tutorial
+
+    https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/a_old_versions/geophysical.ker
 
