@@ -1,0 +1,20 @@
+list of cities
+--> (lat , long, alt) -> (deg, deg, m)
+--> (long,  lat, alt) -> (rad, rad, m)
+--> (   x,    y,   z) -> (  m,   m, m)
+
+gs:
+    u/d times - gfposc(10 deg w/o buffer)  # TODO: What's the real angle
+
+for city in cities:
+    image acq - gfposc(65 deg w/o buffer)  # TODO: What's the real angle
+    --> list of times for image all image acquisitions for each city -> [(start t, stop t) ...]
+
+combine all image acquisition times into single list
+[(city #, (start t, stop t)) ...]
+
+times for data uplink/downlink
+times for image acquisition
+
+take orbit + list of times -> plot the orbit with color different for time
+cones + spheres for cities
