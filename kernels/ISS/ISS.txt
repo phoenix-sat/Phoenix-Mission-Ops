@@ -1,0 +1,5 @@
+\begindata
+    KERNELS_TO_LOAD = (
+        'naif0011.tls',
+        'ISS.bsp')
+\begintext

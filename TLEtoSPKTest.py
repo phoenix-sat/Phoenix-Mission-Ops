@@ -5,20 +5,21 @@ import spiceypy as spice
 init_notebook_mode()
 
 spice.furnsh("minXSS.bsp")
+spice.furnsh("ASUGS.bsp")
 spice.furnsh("cpck05Mar2004.tpc")
 spice.furnsh("naif0007.tls")
 
-step = 2000
+step = 20000
 
 # Get et values one and two, we could vectorize str2et
 etOne = spice.str2et('Jun 20, 2016')
-etTwo = spice.str2et('Jun 21, 2016')
+etTwo = spice.str2et('July 21, 2016')
 
 # get times
 times = np.linspace(etOne, etTwo, step, endpoint=False)
 
 # Run spkpos as a vectorized function
-positions, lightTimes = spice.spkpos('41474', times, 'J2000', 'NONE', 'EARTH')
+positions, lightTimes = spice.spkpos('41474', times, 'IAU_EARTH', 'NONE', '-999999')
 
 # Positions is a 3xN vector of XYZ positions
 print("Positions: ")

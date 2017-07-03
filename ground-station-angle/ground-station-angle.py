@@ -11,13 +11,13 @@ utc = [spice.str2et('Jun 11, 2017'), spice.str2et('Jun 13, 2017')]
 
 TIMFMT = "YYYY MON DD HR:MN:SC.###### TDB::RND::TDB"
 
-target   = "-125544";
+target   = "-125544"
 obsrvr   = "-999999"
 inframe  = "IAU_EARTH"
 crdsys   = "LATITUDINAL"
 coord    = "LATITUDE"
 relate   = ">"
-refval   = math.radians(10)
+refval   = math.radians(65)
 step     = 30
 nintvals = 100000
 adjust   = 0.0
