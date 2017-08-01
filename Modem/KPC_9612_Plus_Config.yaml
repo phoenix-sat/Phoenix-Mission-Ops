@@ -1,0 +1,20 @@
+Serial:
+ ABAUD: 0
+ SERIAL_Port: /dev/ttyUSB0
+Startup:
+ MYCALL KI7NUU 
+ Terminal:
+ - ECHO ON
+ - HBAUD 1200
+ - HBAUD 9600
+ - MONITOR ON
+ - START $11
+ - STOP $13
+ - INTFACE TERMINAL
+Calabration:
+ - DISPLAY: 'DISPLAY'
+ - RESEET: 'RESET'
+ - RESTORE DEFAULT: 'RESTORE DEFAULT'
+PORT:
+ PORT_1: 1
+ PORT_2: 2

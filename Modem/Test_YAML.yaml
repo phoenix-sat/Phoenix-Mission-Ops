@@ -1,0 +1,6 @@
+Serial:
+ ABAUD: 0
+ SERIAL_Port: /dev/ttyUSB0
+
+Terminal:
+ DISPLAY: 'DISPLAY'
