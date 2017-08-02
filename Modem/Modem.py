@@ -36,10 +36,10 @@ class Modem(object):
 
 		#Sets the settings to the desired values
 #################################################
-		count = len(cfg['Startup']['Terminal'])
+		count = len(cfg['Terminal'])
 		out = ''
 		while count > 0:
-			self.ser.write(cfg['Startup']['Terminal'][count - 1])
+			self.ser.write(cfg['Terminal'][count - 1])
 			self.ser.write('\r')
 			count = count - 1
 #################################################		
@@ -53,21 +53,51 @@ class Modem(object):
 		if out != '':
 			print(">>" + out)
 #################################################
+		return self.ser
 
-	
-	def Reboot(self):
+	#adding this in just in case we want to start fresh when activiating the TNC
+	'''def Reboot(self):
+		self.ser = self.__init__()
 		cfg = self.parse_config()
 		self.ser.write(cfg['Calabration']['RESTORE DEFAULT'])
 		time.sleep(8)
 		self.ser.write('*')
 		time.sleep(1)
 		self.ser.write(cfg['Startup']['MYCALL'])
-		self.__init__()
+		self.__init__()'''
 		
-		
-
-
+	#This will switch the ports we are listening and transmitting to.
+	#I do not have to worry about changeing the HBAUD here because that can be changed in the config
+	#All this will really do is switch from port 1 to port 2 to listen and transmit	
+	def Switch_Port(self):
+		self.ser = self.__init__()
+		cfg = self.parse_config()
+		User = input("To select port, type 1 or 2")
+		if User == 2:
+			self.ser.write(cfg['PORT']['PORT_2'])
+		if User == 1:
+			self.ser.write(cfg['PORT']['PORT_1'])
 if __name__ == "__main__":
 	mymodem=Modem()
 	#print(mymodem.cfg)
 	#mymodem.__init__()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
