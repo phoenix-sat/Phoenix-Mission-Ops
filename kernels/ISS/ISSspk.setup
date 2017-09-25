@@ -2,14 +2,14 @@
     INPUT_DATA_TYPE     = 'TL_ELEMENTS'
     OUTPUT_SPK_TYPE     = 10
     TLE_INPUT_OBJ_ID    = 25544
-    TLE_SPK_OBJ_ID      = -125544
+    TLE_SPK_OBJ_ID      = -25544
     TLE_START_PAD       = '2 days'
     TLE_STOP_PAD        = '2 days'
     CENTER_ID           = 399
     REF_FRAME_NAME      = 'J2000'
     LEAPSECONDS_FILE    = 'naif0011.tls'
-    INPUT_DATA_FILE     = 'ISS.tle'
-    OUTPUT_SPK_FILE     = 'ISS.bsp'
+    INPUT_DATA_FILE     = 'ISSNEWTLE.tle'
+    OUTPUT_SPK_FILE     = 'ISSNEWTLE.bsp'
     PCK_FILE            = 'geophysical.ker'
     SEGMENT_ID          = 'ISS mkspk setup file'
     PRODUCER_ID         = 'Jeremy Jakubowski'

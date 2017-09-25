@@ -4,22 +4,24 @@ from plotly.graph_objs import Scatter3d, Line, Data, Layout
 import spiceypy as spice
 init_notebook_mode()
 
-spice.furnsh("minXSS.bsp")
-spice.furnsh("ASUGS.bsp")
-spice.furnsh("cpck05Mar2004.tpc")
-spice.furnsh("naif0007.tls")
+spice.furnsh("kernels/ISS/ISS.bsp")
+spice.furnsh("kernels/ASU_gs/ASUGS.bsp")
+#spice.furnsh("kernels/pck/cpck05Mar2004.tpc")
+#spice.furnsh("kernels/leap_seconds/naif0007.tls")
+spice.furnsh("kernels/leap_seconds/naif0011.tls")
+spice.furnsh("kernels/pck/pck00010.tpc")
 
 step = 20000
 
 # Get et values one and two, we could vectorize str2et
-etOne = spice.str2et('Jun 20, 2016')
-etTwo = spice.str2et('July 21, 2016')
+etOne = spice.str2et('Jun 11, 2017')
+etTwo = spice.str2et('Jun 14, 2017')
 
 # get times
 times = np.linspace(etOne, etTwo, step, endpoint=False)
 
 # Run spkpos as a vectorized function
-positions, lightTimes = spice.spkpos('41474', times, 'IAU_EARTH', 'NONE', '-999999')
+positions, lightTimes = spice.spkpos('-125544', times, 'IAU_EARTH', 'NONE', '-999999')
 
 # Positions is a 3xN vector of XYZ positions
 print("Positions: ")
@@ -48,14 +50,17 @@ barycenter = Scatter3d(
     name='bc',
     mode='marker',
     marker=dict(
-        size=10,
+        size=5,
         color='orange'
     )
 )
 
 data = Data([threeDPlot, barycenter])
 
-layout = Layout(title="MinXSS TLE->SPK MKSPK demonstration")
+layout = Layout(title="ISS TLE->SPK MKSPK demonstration")
 
 fig = dict(data=data, layout=layout)
-plot(fig)
+#plot(fig)
+print (etOne)
+print (etTwo)
+

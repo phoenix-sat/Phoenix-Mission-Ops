@@ -1,13 +1,13 @@
 import spiceypy as spice
 import math
 
-spice.furnsh("ISS.bsp")
-spice.furnsh("ASUGS.bsp")
-spice.furnsh("naif0011.tls")
-spice.furnsh("pck00010.tpc")
+spice.furnsh("kernels/ISS/ISS.bsp")
+spice.furnsh("kernels/ASU_gs/ASUGS.bsp")
+spice.furnsh("kernels/leap_seconds/naif0011.tls")
+spice.furnsh("kernels/pck/pck00010.tpc")
 
 # we are going to get positions between these two dates
-utc = [spice.str2et('Jun 11, 2017'), spice.str2et('Jun 13, 2017')]
+utc = [spice.str2et('Jun 11, 2017'), spice.str2et('Jun 14, 2017')]
 
 TIMFMT = "YYYY MON DD HR:MN:SC.###### TDB::RND::TDB"
 
@@ -34,3 +34,7 @@ print(result)
 for i in range(spice.wncard(result)):
     k = spice.wnfetd(result, i)
     print("{}    {}".format(spice.timout(k[0], TIMFMT), spice.timout(k[1], TIMFMT)))
+
+for i in range(spice.wncard(result)):
+    x = spice.wnfetd(result, i)
+    print(x)
